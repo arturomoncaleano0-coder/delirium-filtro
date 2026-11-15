@@ -25,3 +25,24 @@ body {
     object-fit: cover;
     transform: scaleX(-1);
 }
+
+
+/* Control de activacion de audio: necesario por las restricciones de autoplay. */
+#enable-audio {
+    position: absolute;
+    z-index: 20;
+    top: 18px;
+    right: 18px;
+    padding: 11px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 999px;
+    background: rgba(15, 15, 15, 0.78);
+    color: #fff;
+    font: 600 14px/1.2 Arial, sans-serif;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+}
+#enable-audio:disabled {
+    opacity: 0.75;
+    cursor: wait;
+}

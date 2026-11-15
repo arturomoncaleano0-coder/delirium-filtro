@@ -22,6 +22,7 @@
     <div id="app">
         <video id="video-renderer"></video>
         <canvas id="canvas-renderer"></canvas>
+        <button id="enable-audio" type="button">Activar sonido</button>
     </div>
 
     <script type="module">
@@ -31,7 +32,23 @@
         // para probar otra sin tocar el codigo: index.html?json=app_hulk.json
         const scene = new URLSearchParams(location.search).get("json") || "app.json";
 
-        startFaceFilter(scene);
+        const filter = await startFaceFilter(scene);
+        const audioButton = document.getElementById("enable-audio");
+
+        audioButton.addEventListener("click", async () => {
+            audioButton.disabled = true;
+            audioButton.textContent = "Activando...";
+            try {
+                await filter.player.unlockAudio();
+                audioButton.textContent = "Sonido activado";
+                audioButton.classList.add("audio-enabled");
+                window.setTimeout(() => audioButton.remove(), 1400);
+            } catch (error) {
+                console.error(error);
+                audioButton.disabled = false;
+                audioButton.textContent = "Reintentar sonido";
+            }
+        });
     </script>
 </body>
 
